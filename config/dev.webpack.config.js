@@ -21,13 +21,14 @@ const { config: webpackConfig, plugins } = config({
   ...(process.env.PROXY ? webpackProxy : insightsProxy),
 });
 
-const modulesConfig = require('@redhat-cloud-services/frontend-components-config/federated-modules')(
-  {
-    root: resolve(__dirname, '../'),
-    moduleName: 'apiDocs',
-    useFileHash: false,
-  }
-);
+const modulesConfig =
+  require('@redhat-cloud-services/frontend-components-config/federated-modules')(
+    {
+      root: resolve(__dirname, '../'),
+      moduleName: 'apiDocs',
+      useFileHash: false,
+    }
+  );
 
 plugins.push(modulesConfig);
 
