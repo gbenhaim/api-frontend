@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import {
   PageHeader,
   PageHeaderTitle,
-  Main,
-} from '@redhat-cloud-services/frontend-components';
+} from '@redhat-cloud-services/frontend-components/PageHeader';
+import { Main } from '@redhat-cloud-services/frontend-components/Main';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import SwaggerUI from 'swagger-ui-react';
@@ -13,7 +13,7 @@ import { onLoadOneApi } from '../store/actions';
 import {
   Skeleton,
   SkeletonSize,
-} from '@redhat-cloud-services/frontend-components';
+} from '@redhat-cloud-services/frontend-components/Skeleton';
 import { Facebook } from 'react-content-loader';
 import {
   CardBody,

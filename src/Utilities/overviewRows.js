@@ -15,13 +15,13 @@ import {
   sortable,
   SortByDirection,
 } from '@patternfly/react-table';
-import { EmptyTable } from '@redhat-cloud-services/frontend-components';
+import { EmptyTable } from '@redhat-cloud-services/frontend-components/EmptyTable';
 import { ExportIcon } from '@patternfly/react-icons';
 import { oneApi } from '../api';
 import fileDownload from 'js-file-download';
 import JSZip from 'jszip';
 import flatten from 'lodash/flatten';
-import { treeTable } from '@redhat-cloud-services/frontend-components/components/TreeTable';
+import { treeTable } from '@redhat-cloud-services/frontend-components/TreeTable';
 
 const indexToKey = ['', 'title', 'appName', 'version']; // pf indexes from 1 not 0
 
