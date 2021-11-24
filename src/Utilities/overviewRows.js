@@ -39,7 +39,7 @@ export const columns = (onSetRows) => [
 export const rowMapper = (
   title,
   appName,
-  version,
+  versions,
   selectedRows = [],
   apiName
 ) => ({
@@ -48,8 +48,12 @@ export const rowMapper = (
     {
       title: (
         <Fragment>
-          {version ? (
-            <Link to={`/${apiName}${version !== 'v1' ? `/${version}` : ''}`}>
+          {versions ? (
+            <Link
+              to={`/${apiName}${
+                versions[0] !== 'v1' ? `/${apiName}/${versions[0]}` : ''
+              }`}
+            >
               {title}
             </Link>
           ) : (
@@ -63,14 +67,26 @@ export const rowMapper = (
         'data-position': 'title',
       },
     },
-    version ? `/api/${apiName}` : '',
+    versions ? `/api/${apiName}` : '',
     {
-      title: <Badge>{version}</Badge>,
-      value: version,
+      title: (
+        <Fragment>
+          {versions &&
+            versions.map((version) => (
+              <Link key={version} to={`/${apiName}/${version}`}>
+                <Badge>{version}</Badge>
+              </Link>
+            ))}
+        </Fragment>
+      ),
+      value: versions,
     },
     {
       title: (
-        <Button variant="plain" onClick={() => downloadFile(apiName, version)}>
+        <Button
+          variant="plain"
+          onClick={() => downloadFile(apiName, versions && versions[0])}
+        >
           {' '}
           <ExportIcon />{' '}
         </Button>
@@ -141,7 +157,7 @@ export function buildRows(
           ...rowMapper(
             title,
             `${api.subItems ? 'parent-' : ''}${apiName || appName}`,
-            version,
+            api.versions,
             selectedRows,
             apiName || appName
           ),
@@ -159,7 +175,7 @@ export function buildRows(
                 ...rowMapper(
                   title,
                   apiName || key,
-                  versions?.[0],
+                  versions,
                   selectedRows,
                   apiName || key
                 ),
