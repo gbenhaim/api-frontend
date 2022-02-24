@@ -14,7 +14,7 @@ const AppEntry = ({ logger }) => {
         getRegistry: () => registry,
       }}
     >
-      <Provider store={init(logger).getStore()}>
+      <Provider store={registry.getStore()}>
         <Router basename={getBaseName(window.location.pathname)}>
           <App />
         </Router>
