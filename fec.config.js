@@ -1,3 +1,4 @@
+console.log(process.env, 'this is env!');
 module.exports = {
   appUrl: '/docs/api',
   debug: true,
@@ -13,11 +14,13 @@ module.exports = {
   plugins: [],
   sassPrefix: '.api-docs, .apiDocs',
   routes: {
-    '/beta/config': {
-      host: 'http://localhost:8889'
-    },
-    '/config': {
-      host: 'http://localhost:8889'
-    }
-  }
+    ...(process.env.CONFIG_PORT && {
+      '/beta/config': {
+        host: `http://localhost:${process.env.CONFIG_PORT}`,
+      },
+      '/config': {
+        host: `http://localhost:${process.env.CONFIG_PORT}`,
+      },
+    }),
+  },
 };

@@ -38,13 +38,12 @@ export const columns = (onSetRows) => [
 
 export const rowMapper = (
   title,
-  appName,
   versions,
   url,
   selectedRows = [],
   apiName
 ) => ({
-  selected: selectedRows?.[appName]?.isSelected,
+  selected: selectedRows?.[title]?.isSelected,
   cells: [
     {
       title: (
@@ -163,7 +162,6 @@ export function buildRows(
         {
           ...rowMapper(
             title,
-            `${api.subItems ? 'parent-' : ''}${apiName || appName}`,
             api.versions,
             api.url,
             selectedRows,
@@ -182,7 +180,6 @@ export function buildRows(
               ([key, { title, versions, url, apiName }]) => ({
                 ...rowMapper(
                   title,
-                  apiName || key,
                   versions,
                   url,
                   selectedRows,
