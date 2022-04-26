@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   PageHeader,
@@ -43,6 +43,17 @@ const Detail = ({ loadApi, detail }) => {
   useEffect(() => {
     loadApi(apiName, version, query.get('url'));
   }, []);
+
+  const requestInterceptor = useCallback(
+    async (req) => {
+      req.headers = {
+        ...(req.headers || {}),
+        Authorization: `Bearer ${await auth.getToken()}`,
+      };
+      return req;
+    },
+    [auth]
+  );
 
   const [isOpen, onModalToggle] = useState(false);
 
@@ -120,13 +131,7 @@ const Detail = ({ loadApi, detail }) => {
                   deepLinking
                   docExpansion="list"
                   spec={detail.spec}
-                  requestInterceptor={async (req) => {
-                    req.headers = {
-                      ...(req.headers || {}),
-                      Authorization: `Bearer ${await auth.getToken()}`,
-                    };
-                    return req;
-                  }}
+                  requestInterceptor={requestInterceptor}
                   onComplete={(system) => {
                     const {
                       layoutActions: { show },

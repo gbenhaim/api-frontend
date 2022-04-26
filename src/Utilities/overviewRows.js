@@ -72,21 +72,35 @@ export const rowMapper = (
     versions
       ? `/api/${apiName}`
       : url
-      ? { title: <span className="ins-c-docs__url">{url}</span>, value: url }
+      ? {
+          title: (
+            <span className="ins-c-docs__url">
+              {url.replace(/openapi$/, '').replace(/^http(?:s):\/\//, '')}
+            </span>
+          ),
+          props: {
+            colSpan: 2,
+          },
+          value: url,
+        }
       : '',
-    {
-      title: (
-        <Fragment>
-          {versions &&
-            versions.map((version) => (
-              <Link key={version} to={`/${apiName}/${version}`}>
-                <Badge>{version}</Badge>
-              </Link>
-            ))}
-        </Fragment>
-      ),
-      value: versions,
-    },
+    ...(!url
+      ? [
+          {
+            title: (
+              <Fragment>
+                {versions &&
+                  versions.map((version) => (
+                    <Link key={version} to={`/${apiName}/${version}`}>
+                      <Badge>{version}</Badge>
+                    </Link>
+                  ))}
+              </Fragment>
+            ),
+            value: versions,
+          },
+        ]
+      : []),
     {
       title: (
         <Button

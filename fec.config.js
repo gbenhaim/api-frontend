@@ -1,4 +1,3 @@
-console.log(process.env, 'this is env!');
 module.exports = {
   appUrl: '/docs/api',
   debug: true,
