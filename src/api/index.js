@@ -23,8 +23,8 @@ export const activeApi = () =>
         })),
     }));
 
-export const oneApi = ({ name, version = 'v1' }) => {
-  const url = generateUrl(name, versionMapper[name] || version);
+export const oneApi = ({ name, version = 'v1', url: defaultUrl }) => {
+  const url = defaultUrl ?? generateUrl(name, versionMapper[name] || version);
   return instance.get(url).then((data) => ({
     ...data,
     latest: url,

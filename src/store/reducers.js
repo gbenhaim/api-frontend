@@ -54,6 +54,7 @@ function onSelectRow(state, { payload: { isSelected, row } }) {
             [`${row.subItems ? 'parent-' : ''}${curr.cells[0].value}`]: {
               isSelected,
               appName: curr.cells[0].value,
+              url: curr.cells[1].value,
               version: curr.cells[2].value,
               ...(curr.subItems && {
                 subItems: curr.subItems,
@@ -66,6 +67,7 @@ function onSelectRow(state, { payload: { isSelected, row } }) {
           [`${row.subItems ? 'parent-' : ''}${row.cells[0].value}`]: {
             isSelected,
             appName: row.cells[0].value,
+            url: row.cells[1].value,
             version: row.cells[2].value,
             ...(row.subItems && {
               subItems: row.subItems,

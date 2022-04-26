@@ -38,3 +38,9 @@
 .ins-c-api__download--selected {
     margin-left: var(--pf-global--spacer--md);
 }
+
+.pf-c-treeview {
+  tr td span.ins-c-docs__url {
+    word-break: break-all;
+  }
+}
