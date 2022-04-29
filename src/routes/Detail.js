@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   PageHeader,
@@ -33,14 +33,30 @@ import {
 import { useParams } from 'react-router-dom';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import ReactJson from 'react-json-view';
+import { useQuery } from '../Utilities/hooks';
+import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
 
 const Detail = ({ loadApi, detail }) => {
   const { apiName, version = 'v1' } = useParams();
+  const query = useQuery();
+  const { auth } = useChrome();
   useEffect(() => {
-    loadApi(apiName, version);
+    loadApi(apiName, version, query.get('url'));
   }, []);
 
+  const requestInterceptor = useCallback(
+    async (req) => {
+      req.headers = {
+        ...(req.headers || {}),
+        Authorization: `Bearer ${await auth.getToken()}`,
+      };
+      return req;
+    },
+    [auth]
+  );
+
   const [isOpen, onModalToggle] = useState(false);
+
   return (
     <React.Fragment>
       <PageHeader className="pf-m-light">
@@ -58,7 +74,7 @@ const Detail = ({ loadApi, detail }) => {
                   <Level className="ins-c-docs__api-detail">
                     <LevelItem className="ins-c-docs__api-detail-info">
                       {detail.loaded ? (
-                        `Detail of ${detail.spec.info.title}`
+                        `Detail of ${detail.spec?.info?.title}`
                       ) : (
                         <Skeleton size={SkeletonSize.md} />
                       )}
@@ -70,7 +86,11 @@ const Detail = ({ loadApi, detail }) => {
                             <TextContent>
                               <Text
                                 component="a"
-                                href={`${location.origin}${detail.latest}`}
+                                href={`${
+                                  detail.latest.includes('https://')
+                                    ? ''
+                                    : location.origin
+                                }${detail.latest}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                               >
@@ -111,6 +131,7 @@ const Detail = ({ loadApi, detail }) => {
                   deepLinking
                   docExpansion="list"
                   spec={detail.spec}
+                  requestInterceptor={requestInterceptor}
                   onComplete={(system) => {
                     const {
                       layoutActions: { show },
@@ -197,6 +218,7 @@ export default connect(
     detail,
   }),
   (dispatch) => ({
-    loadApi: (api, version) => dispatch(onLoadOneApi({ name: api, version })),
+    loadApi: (api, version, url) =>
+      dispatch(onLoadOneApi({ name: api, version, url })),
   })
 )(Detail);
