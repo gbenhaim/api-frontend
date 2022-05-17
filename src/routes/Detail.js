@@ -80,7 +80,7 @@ const Detail = ({ loadApi, detail }) => {
                       )}
                     </LevelItem>
                     <LevelItem>
-                      <Split gutter="sm">
+                      <Split hasGutter>
                         <SplitItem className="ins-c-docs__api-detail-info">
                           {detail.loaded && !detail.error ? (
                             <TextContent>
