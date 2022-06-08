@@ -52,8 +52,8 @@ export const rowMapper = (
           {versions || url || github ? (
             <Link
               to={`/${apiName}${
-                versions && versions[0] !== 'v1'
-                  ? `/${apiName}/${versions[0] || ''}`
+                versions && versions[0] && versions[0] !== 'v1'
+                  ? `/${versions[0]}`
                   : ''
               }${url || github ? '?' : ''}${url ? `url=${url}` : ''}${
                 github
