@@ -43,8 +43,7 @@
     ],
     "moduleNameMapper": {
       "\\.(css|scss)$": "identity-obj-proxy"
-    },
-    "test": "TZ=UTC jest --verbose --no-cache"
+    }
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
@@ -78,7 +77,7 @@
   },
   "scripts": {
     "build": "fec build",
-    "test": "jest --verbose",
+    "test": "TZ=UTC jest --verbose --no-cache",
     "lint": "npm-run-all lint:*",
     "lint:js": "eslint config src",
     "lint:js:fix": "eslint config src --fix",
