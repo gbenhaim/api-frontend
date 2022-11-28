@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import NotificationsPortal from '@redhat-cloud-services/frontend-components-notifications/NotificationPortal';
 import { Routes } from './Routes';
@@ -20,10 +19,6 @@ const App = () => {
       <Routes />
     </React.Fragment>
   );
-};
-
-App.propTypes = {
-  history: PropTypes.object,
 };
 
 export default App;
