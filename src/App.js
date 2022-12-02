@@ -5,13 +5,10 @@ import './App.scss';
 import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
 
 const App = () => {
-  const chrome = useChrome();
+  const { updateDocumentTitle } = useChrome();
   useEffect(() => {
-    if (chrome) {
-      const { identifyApp } = chrome.init();
-      identifyApp(CRC_APP_NAME);
-    }
-  }, [chrome]);
+    updateDocumentTitle(CRC_APP_NAME);
+  }, [updateDocumentTitle]);
 
   return (
     <React.Fragment>
