@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Template
 metadata:
-  name: api-frontend
+  name: api-docs
 objects:
   - apiVersion: cloud.redhat.com/v1alpha1
     kind: Frontend
     metadata:
-      name: devprod
+      name: api-docs
     spec:
       envName: ${ENV_NAME}
       title: API Frontend
