@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/RedHatInsights/insights-frontend-starter-app.svg?branch=master)](https://travis-ci.org/RedHatInsights/insights-frontend-starter-app)
-
 # Api docs
 
 React.js application to show API documentations on single pane of glass. This application uses [RedHatInsights/cloud-services-config](https://github.com/RedHatInsights/cloud-services-config) to build the table and details based on API fields in `main.yml` file.
