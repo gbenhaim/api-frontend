@@ -9,6 +9,7 @@ RUN echo -e "[nodejs]\nname=nodejs\nstream=${NODEJS_VERSION}\nprofiles=\nstate=e
 
 COPY . .
 
+ENV CADDY_TLS_MODE http_port 8000
 
 RUN microdnf install nodejs && microdnf remove nodejs-full-i18n nodejs-docs && microdnf clean all
 
