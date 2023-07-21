@@ -16,6 +16,6 @@ RUN npm install
 RUN npm run build
 COPY ./Caddyfile /opt/app-root/src/Caddyfile
 RUN ls -lah .
-COPY ./dist /opt/app-root/src/dist/
+RUN echo $PWD
 COPY ./package.json /opt/app-root/src
 CMD ["caddy", "run", "--config", "/opt/app-root/src/Caddyfile"]
